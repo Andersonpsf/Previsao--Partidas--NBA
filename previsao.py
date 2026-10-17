@@ -56,8 +56,8 @@ def calc(info_time, info_time2, def_treinamento):
 
     vitorias_time2 = info_gerais2[info_gerais2['WL'] == 'W'].shape[0]
     derrotas_time2 = info_gerais2[info_gerais2['WL'] == 'L'].shape[0]
-    print(f'O time {info_time["full_name"]} tem {vitorias_time1} vitórias e {derrotas_time1} derrotas na temporada 2023-24.')
-    print(f'O time {info_time2["full_name"]} tem {vitorias_time2} vitórias e {derrotas_time2} derrotas na temporada 2023-24.')
+    print(f'O time {info_time["full_name"]} tem {vitorias_time1} vitórias e {derrotas_time1} derrotas nas últimas temporadas .')
+    print(f'O time {info_time2["full_name"]} tem {vitorias_time2} vitórias e {derrotas_time2} derrotas nas últimas temporadas .')
 
 info_time, info_time2 = times()
 calc(info_time, info_time2, def_treinamento=main.df_treinamento)

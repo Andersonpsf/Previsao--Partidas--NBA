@@ -78,18 +78,7 @@ temporadas_usadas = [
 
 temporada_teste = ['2024-25']
 
-# Estatísticas que vamos usar para calcular o desempenho recente
-estatisticas = [
-    'PTS',
-    'FG_PCT',
-    'FG3A',
-    'FG3_PCT',
-    'REB',
-    'AST',
-    'STL',
-    'BLK',
-    'TOV'
-]
+
 df_temporadas_treinamento = []
 for temporada in temporadas_usadas:
     gamefinder = leaguegamefinder.LeagueGameFinder(season_nullable=temporada, league_id_nullable='00', season_type_nullable='Regular Season')
@@ -106,8 +95,40 @@ print(group["WL"].value_counts())
 print("================================")
 print(group["WL"].count())
 print("================================")
+
+
+df_treinamento['WL'] = (df_treinamento['WL']=='W').astype(int)
+df_treinamento['IS_HOME'] = df_treinamento['MATCHUP'].str.contains('vs.').astype(int)
 df_treinamento.to_csv('dados_treinamento.csv', index=False)
-# df_treinamento = df.drop_duplicates(df_treinamento['GAME_ID'])
+print("Dados de treinamento salvos em 'dados_treinamento.csv'.")
+print(df_treinamento)
+print(df_treinamento['IS_HOME'])
+
+infos = [
+    'TEAM_ID',
+    'GAME_ID',
+    'TEAM_NAME',
+    'GAME_DATE',
+    'MATCHUP',
+    'WL',
+    'PTS',
+    'IS_HOME',
+]
+
+print(df_treinamento[infos].head(10))
+
+# Estatísticas que vamos usar para calcular o desempenho recente
+estatisticas = [
+    'PTS',
+    'FG_PCT',
+    'FG3A',
+    'FG3_PCT',
+    'REB',
+    'AST',
+    'STL',
+    'BLK',
+    'TOV'
+]
 # print(df_treinamento)
 # Busca jogos das últimas temporadas
 # gamefinder = leaguegamefinder.LeagueGameFinder(season_nullable='2023-24', league_id_nullable='00')
