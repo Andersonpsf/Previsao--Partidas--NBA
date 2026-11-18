@@ -80,14 +80,16 @@ temporada_teste = ['2024-25']
 
 
 df_temporadas_treinamento = []
-for temporada in temporadas_usadas:
+for temporada in temporadas_usadas + temporada_teste:
     gamefinder = leaguegamefinder.LeagueGameFinder(season_nullable=temporada, league_id_nullable='00', season_type_nullable='Regular Season')
     games = gamefinder.get_data_frames()[0]
+    games['TEMPORADA'] = temporada
     df_temporadas_treinamento.append(games)
     print(f"Temporada: {temporada}")
     time.sleep(1)  # Pausa de 1 segundo entre as chamadas para evitar sobrecarga na API
 df_treinamento = pd.concat(df_temporadas_treinamento, ignore_index=True)
 print(df_treinamento)
+print(df_treinamento['TEMPORADA'].value_counts())
 
 group = df_treinamento.groupby('TEAM_NAME')
 print("================================")
@@ -99,8 +101,8 @@ print("================================")
 
 df_treinamento['WL'] = (df_treinamento['WL']=='W').astype(int)
 df_treinamento['IS_HOME'] = df_treinamento['MATCHUP'].str.contains('vs.').astype(int)
-df_treinamento.to_csv('dados_treinamento.csv', index=False)
-print("Dados de treinamento salvos em 'dados_treinamento.csv'.")
+df_treinamento.to_csv('dados\dados_treinamento.csv', index=False)
+print("Dados de treinamento salvos em 'dados\dados_treinamento.csv'.")
 print(df_treinamento)
 print(df_treinamento['IS_HOME'])
 
