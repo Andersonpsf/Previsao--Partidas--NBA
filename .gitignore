@@ -1,2 +1,11 @@
 __pycache__/
 *.pyc
+Probabilidade.py
+processamento.py
+limpeza.py
+Treino.py
+datset.py
+dados/dados_processados.csv
+dados/dataset_features.csv
+venv/
+.venv/
